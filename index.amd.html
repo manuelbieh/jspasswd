@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=yes" />
+
+<title></title>
+<style>
+div[data-tpl] {
+	display: none;
+}
+
+.hidden {
+	display: none;
+}
+</style>
+</head>
+<body>
+
+<div id="wrapper">
+	<div id="canvas"></div>
+</div>
+
+<script type="text/x-handlebars-template" data-tpl="open-url">
+	<div id="open-url">
+		<p>
+			<label>Please enter a URL to open<br>
+			<input type="url" id="db-url" value="smpl.pwd">
+		</p>
+		<p>
+			<label>Enter password<br>
+			<input type="password" id="db-pw" value="test">
+		</p>
+		<button id="open">Open</button>
+		<button id="btn-create-db">Create new DB</button>
+	</div>
+</script>
+
+
+<script type="text/x-handlebars-template" data-tpl="password-list">
+	<div id="password-list">
+		<div class="visibility-switch">
+			<button class="show-all">Show All</button>
+			<button class="hide-all hidden">Hide All</button>
+		</div>
+		<ul>
+		{{#each items}}
+			<li class="pw-item">
+				<h1>{{title}}</h1>
+				<dl>
+					{{#if url}}
+					<dt class="item-url">URL</dt>
+					<dd><a href="{{url}}" target="_blank">{{url}}</a></dd>
+					{{/if}}
+					<dt class="item-password">Password</dt>
+					<dd><button class="btn-pwd-switch" data-resolved="{{resolved}}">••••••••</button></dd>
+					{{#if notes}}
+					<dt class="item-notes">Notes</dt>
+					<dd>{{notes}}</dd>
+					{{/if}}
+				</dl>
+			</li>
+		{{else}}
+			<li>No items found.</li>
+		{{/each}}
+		</ul>
+	</div>
+</script>
+
+<script data-main="js/app.js" src="js/lib/require.js"></script>
+
+</body>
+</html>
