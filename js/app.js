@@ -2,26 +2,34 @@ requirejs.config({
     baseUrl: 'js/lib',
     paths: {
         app: '../app',
-        handlebars: 'handlebars-1.3.0'
+        handlebars: 'handlebars-1.3.0',
+        GibberishAES: 'gibberish-aes-1.0.0.min'
     },
     shim: {
 		'handlebars': {
 			'exports': 'Handlebars'
+		},
+		'GibberishAES': {
+			'exports': 'GibberishAES'
 		}
     }
 });
 
-require( ["jquery", "handlebars"], function($, hbs) {
+require( ["jquery", "handlebars", "GibberishAES", "app/callback", "app/template", "app/database", "app/events"], function($, hbs, GibberishAES) {
 
-	var tpl = hbs.compile($('[data-tpl="password-list"]').html());
-	console.log(tpl({
-		items: [{
-			url: 'foo',
-			notes: 'ntoes',
-			encrypted: 'enc',
-			resolved: 'res',
-			title: 'TITLE'
-		}]
-	}));
+	var Callback = require('app/callback');
+	var Template = require('app/template');
+	var Database = require('app/database');
+	var Events = require('app/events');
+
+	//console.log(Database.encryptEntry('foo', 'test'));
+	Callback.on('databaseopen', function() {
+		alert('db is open!');
+	});
+
+	Template.render('open-url');
+
+	return;
+
 
 });

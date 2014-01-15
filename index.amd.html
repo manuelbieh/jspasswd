@@ -2,37 +2,46 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=yes" />
+<!--<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=yes" />-->
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
 
 <title></title>
-<style>
-div[data-tpl] {
-	display: none;
-}
-
-.hidden {
-	display: none;
-}
-</style>
+<link href="css/layout.css" rel="stylesheet" type="text/css">
+<!--
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+<link href="css/bootstrap.theme.css" rel="stylesheet" type="text/css">
+-->
+<script></script>
 </head>
 <body>
 
 <div id="wrapper">
-	<div id="canvas"></div>
+	<div id="canvas">
+		
+	</div>
 </div>
 
 <script type="text/x-handlebars-template" data-tpl="open-url">
-	<div id="open-url">
-		<p>
-			<label>Please enter a URL to open<br>
-			<input type="url" id="db-url" value="smpl.pwd">
-		</p>
-		<p>
-			<label>Enter password<br>
-			<input type="password" id="db-pw" value="test">
-		</p>
-		<button id="open">Open</button>
-		<button id="btn-create-db">Create new DB</button>
+	<div>
+		<h1>Psswrd.js</h1>
+		<div class="form-group">
+			<p>
+				<label>Enter database URL<br>
+				<input type="url" id="db-url" value="smpl.pwd">
+			</p>
+		</div>
+		<div class="form-group">
+			<p>
+				<label>Enter password<br>
+				<input type="password" id="db-pw" value="test">
+			</p>
+		</div>
+		<div class="form-group">
+			<p>
+				<label><input type="checkbox" id="db-save"> Save local copy</label>
+			</p>
+		</div>
+		<button id="open" class="">Open</button>
 	</div>
 </script>
 
@@ -44,7 +53,7 @@ div[data-tpl] {
 			<button class="hide-all hidden">Hide All</button>
 		</div>
 		<ul>
-		{{#each items}}
+		{{#each data}}
 			<li class="pw-item">
 				<h1>{{title}}</h1>
 				<dl>
@@ -65,6 +74,14 @@ div[data-tpl] {
 		{{/each}}
 		</ul>
 	</div>
+<!--
+	<nav class="bottom-navbar">
+		<ul>
+			<li>Foo</li>
+			<li>Bar</li>
+		</ul>
+	</nav>
+-->
 </script>
 
 <script data-main="js/app.js" src="js/lib/require.js"></script>
