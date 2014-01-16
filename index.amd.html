@@ -17,7 +17,7 @@
 
 <div id="wrapper">
 	<div id="canvas">
-		
+		<div class="inner"></div>
 	</div>
 </div>
 
@@ -51,6 +51,7 @@
 		<div class="visibility-switch">
 			<button class="show-all">Show All</button>
 			<button class="hide-all hidden">Hide All</button>
+			<button id="lock">Lock</div>
 		</div>
 		<ul>
 		{{#each data}}
@@ -62,10 +63,10 @@
 					<dd><a href="{{url}}" target="_blank">{{url}}</a></dd>
 					{{/if}}
 					<dt class="item-password">Password</dt>
-					<dd><button class="btn-pwd-switch" data-resolved="{{resolved}}">••••••••</button></dd>
+					<dd><button class="btn-pwd-switch" data-visible="false" data-resolved="{{resolved}}">••••••••</button></dd>
 					{{#if notes}}
 					<dt class="item-notes">Notes</dt>
-					<dd>{{notes}}</dd>
+					<dd>{{breaklines notes}}</dd>
 					{{/if}}
 				</dl>
 			</li>
@@ -83,6 +84,23 @@
 	</nav>
 -->
 </script>
+
+
+
+<script type="text/x-handlebars-template" data-tpl="lockscreen">
+	<div>
+		<h1>Locked</h1>
+		<div class="form-group">
+			<p>
+				<label>Enter password<br>
+				<input type="password" id="db-pw" value="">
+			</p>
+		</div>
+		<button id="unlock" class="">Unlock</button>
+	</div>
+</script>
+
+
 
 <script data-main="js/app.js" src="js/lib/require.js"></script>
 

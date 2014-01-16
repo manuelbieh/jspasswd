@@ -15,7 +15,7 @@ define(["jquery", "GibberishAES", "app/callback"], function($, GibberishAES, Cal
 		},
 
 		setPassword: function(password) {
-			_password = password;
+			_password = GibberishAES.enc(password, password);
 			return this;
 		},
 
@@ -42,12 +42,12 @@ define(["jquery", "GibberishAES", "app/callback"], function($, GibberishAES, Cal
 
 		},
 
-		decryptAll: function(_database) {
+		decryptAll: function(_database, password) {
 
 			if(typeof _database == 'object') {
 
 				for(var item in _database.data) {
-					_database.data[item].resolved = this.decryptEntry(_database.data[item].encrypted, this.getPassword());
+					_database.data[item].resolved = this.decryptEntry(_database.data[item].encrypted, password);
 				}
 
 			} else {
@@ -78,7 +78,7 @@ define(["jquery", "GibberishAES", "app/callback"], function($, GibberishAES, Cal
 						localStorage.setItem('_database', JSON.stringify(Database.get()));
 					}
 
-					Database.open();
+					Database.open(password);
 
 				} catch(e) {
 
@@ -91,9 +91,9 @@ define(["jquery", "GibberishAES", "app/callback"], function($, GibberishAES, Cal
 
 		},
 
-		open: function() {
+		open: function(password) {
 			try {
-				this.decryptAll(this.get());
+				this.decryptAll(this.get(), password);
 				Callback.trigger('databaseopen.done');
 			} catch(e) {
 				Callback.trigger('databaseopen.fail', e);
@@ -114,6 +114,8 @@ define(["jquery", "GibberishAES", "app/callback"], function($, GibberishAES, Cal
 				for(var item in _database.data) {
 					delete _database.data[item].resolved;
 				}
+
+				Callback.trigger('database.locked');
 
 			} else {
 

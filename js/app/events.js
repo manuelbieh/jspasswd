@@ -1,4 +1,4 @@
-define(["jquery", "GibberishAES", "app/database", "app/callback", "app/template"], function($, GibberishAES, Database, Callback, Template) {
+define(["jquery", "GibberishAES", "app/database", "app/callback", "app/template", "app/utils"], function($, GibberishAES, Database, Callback, Template, Utils) {
 
 	$(document).on('click', '#open', function() {
 
@@ -10,8 +10,45 @@ define(["jquery", "GibberishAES", "app/database", "app/callback", "app/template"
 
 	});
 
+	$(document).on('click', '#lock', function() {
+		Database.lock();
+	});
+
+	$(document).on('click', '#unlock', function() {
+		//Database.getPassword()
+		try {
+			var pw = GibberishAES.dec(Database.getPassword(), $('#db-pw').val());
+			Database.open(pw);
+		} catch(e) {
+			alert('Wrong password.');
+		}
+	});
+
+	$(document).on('click', '.btn-pwd-switch', function(e) {
+
+		Utils.togglePasswordVisibility($(this));
+
+	});
+
+	$(document).on('click', '.visibility-switch button', function(e) {
+
+		var $$ = $(this);
+		$$.parent().find('button').removeClass('hidden');
+		$$.addClass('hidden');
+
+		var show = !!$$.hasClass('show-all');
+		$('.pw-item').each(function(i, item) {
+			Utils.togglePasswordVisibility(item, show);
+		});
+
+	});
+
 	Callback.on('databaseopen.done', function() {
 		Template.render('password-list', Database.get());
+	});
+
+	Callback.on('database.locked', function() {
+		Template.render('lockscreen');
 	});
 
 });
