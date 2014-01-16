@@ -2,70 +2,115 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=yes" />
+<!--<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=yes" />-->
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
 
 <title></title>
-<style>
-div[data-tpl] {
-	display: none;
-}
-
-.hidden {
-	display: none;
-}
-</style>
+<link href="css/layout.css" rel="stylesheet" type="text/css">
+<!--
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+<link href="css/bootstrap.theme.css" rel="stylesheet" type="text/css">
+-->
+<script></script>
 </head>
 <body>
 
 <div id="wrapper">
-
 	<div id="canvas">
-		
+		<div class="inner"></div>
 	</div>
-
 </div>
 
-<script type="text/template" data-tpl="open-url">
-	<div id="open-url">
-		<p>
-			<label>Please enter a URL to open<br>
-			<input type="url" id="db-url" value="smpl.pwd">
-		</p>
-		<p>
-			<label>Enter password<br>
-			<input type="password" id="db-pw" value="test">
-		</p>
-		<button id="open">Open</button>
-		<button id="btn-create-db">Create new DB</button>
+<script type="text/x-handlebars-template" data-tpl="open-url">
+	<div>
+		<h1>Psswrd.js</h1>
+		<div class="form-group">
+			<p>
+				<label>Enter database URL<br>
+				<input type="url" id="db-url" value="smpl.pwd">
+			</p>
+		</div>
+		<div class="form-group">
+			<p>
+				<label>Enter password<br>
+				<input type="password" id="db-pw" value="test">
+			</p>
+		</div>
+		<div class="form-group">
+			<p>
+				<label><input type="checkbox" id="db-save"> Save local copy</label>
+			</p>
+		</div>
+		<button id="open" class="">Open</button>
 	</div>
 </script>
 
-<script type="text/template" data-tpl="password-list">
+
+<script type="text/x-handlebars-template" data-tpl="password-list">
 	<div id="password-list">
 		<div class="visibility-switch">
 			<button class="show-all">Show All</button>
 			<button class="hide-all hidden">Hide All</button>
 		</div>
+		<a href="lock">LOCK</a>
 		<ul>
+		{{#each data}}
 			<li class="pw-item">
-				<h1></h1>
+				<h1>{{title}}</h1>
 				<dl>
+					{{#if url}}
 					<dt class="item-url">URL</dt>
-					<dd><a href="" target="_blank"></a></dd>
+					<dd><a href="{{url}}" target="_blank">{{url}}</a></dd>
+					{{/if}}
 					<dt class="item-password">Password</dt>
-					<dd><button class="btn-pwd-switch"></button></dd>
+					<dd><button class="btn-pwd-switch" data-visible="false" data-resolved="{{resolved}}">••••••••</button></dd>
+					{{#if notes}}
 					<dt class="item-notes">Notes</dt>
-					<dd></dd>
+					<dd>{{breaklines notes}}</dd>
+					{{/if}}
 				</dl>
 			</li>
+		{{else}}
+			<li>No items found.</li>
+		{{/each}}
 		</ul>
+	</div>
+<!--
+	<nav class="bottom-navbar">
+		<ul>
+			<li>Foo</li>
+			<li>Bar</li>
+		</ul>
+	</nav>
+-->
+</script>
+
+
+
+<script type="text/x-handlebars-template" data-tpl="lockscreen">
+	<div>
+		<h1>Locked</h1>
+		<div class="form-group">
+			<p>
+				<label>Enter password<br>
+				<input type="password" id="db-pw" value="">
+			</p>
+		</div>
+		<button id="unlock" class="">Unlock</button>
 	</div>
 </script>
 
-<script src="js/lib/jsencryption.js"></script>
-<script src="js/lib/handlebars.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
-<script src="js/main.js"></script>
-<!--<script data-main="js/app.js" src="js/lib/require.js"></script>-->
+
+<script type="text/x-handlebars-template" data-tpl="error">
+	<div>
+		<h1>Oops! An error occured.</h1>
+		<p>{{error}}</p>
+	</div>
+</script>
+
+
+
+<script data-main="js/app.js" src="js/lib/require.js"></script>
+
 </body>
 </html>

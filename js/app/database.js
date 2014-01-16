@@ -1,7 +1,8 @@
-define(["jquery", "GibberishAES", "app/callback"], function($, GibberishAES, Callback) {
+define(["jquery", "GibberishAES", "app/callback", "app/router"], function($, GibberishAES, Callback, Router) {
 
 	var _database;
 	var _password;
+	var _locked = true;
 
 	var Database = {
 
@@ -82,7 +83,10 @@ define(["jquery", "GibberishAES", "app/callback"], function($, GibberishAES, Cal
 
 				} catch(e) {
 
-					alert('Could not load database');
+					//alert('Could not load database');
+					Router.go('/error', {
+						error: 'Failed to open database. Wrong password?'
+					});
 					console.log(e);
 
 				}
@@ -92,17 +96,33 @@ define(["jquery", "GibberishAES", "app/callback"], function($, GibberishAES, Cal
 		},
 
 		open: function(password) {
+
 			try {
+
 				this.decryptAll(this.get(), password);
-				Callback.trigger('databaseopen.done');
+				_locked = false;
+				Callback.trigger('database.open');
+				Router.go('/open');
+				
 			} catch(e) {
-				Callback.trigger('databaseopen.fail', e);
+
+				Callback.trigger('database.fail', e);
 				alert('Failed to open database. Wrong password?');
+
 			}
+
 		},
 
 		close: function() {
 		
+		},
+
+		isLocked: function() {
+			return _locked;
+		},
+
+		hasLock: function() {
+			return this.isLocked();
 		},
 
 		lock: function() {
@@ -115,11 +135,13 @@ define(["jquery", "GibberishAES", "app/callback"], function($, GibberishAES, Cal
 					delete _database.data[item].resolved;
 				}
 
-				Callback.trigger('database.locked');
+				_locked = true;
+				//Callback.trigger('database.locked');
 
 			} else {
 
-				alert('No database was loaded');
+				//alert('No database was loaded');
+				Router.go('/');
 				return;
 
 			}

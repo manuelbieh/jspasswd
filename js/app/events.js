@@ -2,7 +2,7 @@ define(["jquery", "GibberishAES", "app/database", "app/callback", "app/template"
 
 	$(document).on('click', '#open', function() {
 
-		Database.load(
+		var dbLoad = Database.load(
 			$('#db-url').val(), 
 			$('#db-pw').val(), 
 			$('#db-save').is(':checked')
@@ -10,18 +10,20 @@ define(["jquery", "GibberishAES", "app/database", "app/callback", "app/template"
 
 	});
 
-	$(document).on('click', '#lock', function() {
-		Database.lock();
-	});
 
 	$(document).on('click', '#unlock', function() {
-		//Database.getPassword()
+
 		try {
+
 			var pw = GibberishAES.dec(Database.getPassword(), $('#db-pw').val());
 			Database.open(pw);
+
 		} catch(e) {
+
 			alert('Wrong password.');
+
 		}
+
 	});
 
 	$(document).on('click', '.btn-pwd-switch', function(e) {
@@ -43,12 +45,14 @@ define(["jquery", "GibberishAES", "app/database", "app/callback", "app/template"
 
 	});
 
-	Callback.on('databaseopen.done', function() {
-		Template.render('password-list', Database.get());
+/*
+	Callback.on('database.open', function() {
+		//Template.render('password-list', Database.get());
 	});
 
 	Callback.on('database.locked', function() {
 		Template.render('lockscreen');
 	});
+*/
 
 });
