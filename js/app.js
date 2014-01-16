@@ -25,9 +25,15 @@ require(["jquery", "handlebars", "GibberishAES", "FastClick", "app/callback", "a
 	var Events = require('app/events');
 	var Router = require('app/router');
 
-	Router.set({
-		baseUrl: '/_git/pword'
-	});
+	if(location.host == 'dev.wiremore.de') {
+		Router.set({
+			baseUrl: '/pword'
+		});
+	} else {
+		Router.set({
+			baseUrl: '/_git/pword'
+		});
+	}
 
 	FastClick.attach(document.body);
 
