@@ -47,12 +47,14 @@
 
 
 <script type="text/x-handlebars-template" data-tpl="password-list">
+
+	<div class="visibility-switch">
+		<button class="show-all">Show All</button>
+		<button class="hide-all hidden">Hide All</button>
+	</div>
+	<a href="lock">LOCK</a>
+
 	<div id="password-list">
-		<div class="visibility-switch">
-			<button class="show-all">Show All</button>
-			<button class="hide-all hidden">Hide All</button>
-		</div>
-		<a href="lock">LOCK</a>
 		<ul>
 		{{#each data}}
 			<li class="pw-item">

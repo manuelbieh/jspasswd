@@ -72,8 +72,14 @@ dd {
 }
 
 .inner {
-	width: 320px;
 	margin: auto;
+	width: 320px;
+	padding: 0 16px;
+}
+
+#password-list {
+	margin-left: -16px;
+	margin-right: -16px;
 }
 
 @media all and (min-width: 480px) {
