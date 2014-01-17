@@ -57,6 +57,23 @@ dd {
 	margin-left: 1.5em;
 }
 
+header {
+	background: rgba(0,0,0,0.3);
+	height: 50px;
+	margin: -16px -16px 0 -16px;
+	position: relative;
+}
+
+header h1 {
+	font-size: 120%;
+	left: 0;
+	line-height: 50px;
+	position: absolute;
+	text-align: center;
+	top: 0;
+	width: 100%;
+}
+
 #wrapper {
 	background: url(../img/bg-main.jpg) no-repeat;
 	background-size: 100% 100%;
@@ -102,4 +119,15 @@ dd {
 	list-style: none;
 	padding: 1em;
 	position: relative;
+}
+
+.btn-icon {
+	display: inline-block;
+	height: 50px;
+	width: 50px;
+}
+
+.icon-menu {
+	background: url(../img/icons/menu.svg) no-repeat center center;
+	background-size: 88% 88%;
 }
