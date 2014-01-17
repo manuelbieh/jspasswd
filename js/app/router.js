@@ -43,11 +43,13 @@ define(['jquery', 'app/callback', 'app/utils'], function($, Callback, Utils) {
 		},
 
 		go: function(url, state) {
+
 			if(url.indexOf('/') === 0) {
 				url = this.get('baseUrl') + url;
 			}
+
 			history.pushState(state, null, url);
-			this.run();
+			//this.run();
 		},
 
 		add: function(route, handler) {

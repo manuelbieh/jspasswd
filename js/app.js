@@ -16,7 +16,7 @@ requirejs.config({
     }
 });
 
-require(["jquery", "handlebars", "GibberishAES", "FastClick", "app/callback", "app/template", "app/database", "app/events", "app/router"], 
+require(["jquery", "handlebars", "GibberishAES", "FastClick", "jquery.locationObserver", "app/callback", "app/template", "app/database", "app/events", "app/router"], 
 	function($, hbs, GibberishAES, FastClick) {
 
 	var Callback = require('app/callback');
@@ -35,14 +35,14 @@ require(["jquery", "handlebars", "GibberishAES", "FastClick", "app/callback", "a
 		});
 	}
 
-	FastClick.attach(document.body);
+	$.locationObserver.start();
 
-	//console.log(Database.encryptEntry('foo', 'test'));
-	Callback.on('database.open', function() {
-
+	$(location).on('change', function() {
+		Router.run();
 	});
 
-	//Template.render('open-url');
+	FastClick.attach(document.body);
+
 
 	Router.add('/(index.html)?', function() {
 
