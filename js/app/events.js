@@ -1,4 +1,4 @@
-define(["jquery", "GibberishAES", "app/database", "app/callback", "app/template", "app/utils"], function($, GibberishAES, Database, Callback, Template, Utils) {
+define(["jquery", "GibberishAES", "app/database", "app/callback", "app/template", "app/utils", "app/router"], function($, GibberishAES, Database, Callback, Template, Utils, Router) {
 
 	$(document).on('click', '#open', function() {
 
@@ -20,7 +20,10 @@ define(["jquery", "GibberishAES", "app/database", "app/callback", "app/template"
 
 		} catch(e) {
 
-			alert('Wrong password.');
+			Router.go('/error', {
+				error: 'Failed to unlock database. Wrong password?'
+			});
+			//alert('Wrong password.');
 
 		}
 

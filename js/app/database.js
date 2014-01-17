@@ -53,7 +53,10 @@ define(["jquery", "GibberishAES", "app/callback", "app/router"], function($, Gib
 
 			} else {
 
-				alert('No database was loaded');
+				Router.go('/error', {
+					error: 'No database was loaded.'
+				});
+
 				return;
 
 			}
@@ -101,13 +104,15 @@ define(["jquery", "GibberishAES", "app/callback", "app/router"], function($, Gib
 
 				this.decryptAll(this.get(), password);
 				_locked = false;
-				Callback.trigger('database.open');
 				Router.go('/open');
+				return true;
 				
 			} catch(e) {
 
-				Callback.trigger('database.fail', e);
-				alert('Failed to open database. Wrong password?');
+				Router.go('/error', {
+					error: 'Failed to open database. Wrong password?'
+				});
+				return false;
 
 			}
 

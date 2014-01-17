@@ -3,7 +3,7 @@ define(['jquery', 'app/callback', 'app/utils'], function($, Callback, Utils) {
 	var _routes = {};
 
 	var _config = {
-		baseUrl: '/_git/pword'
+		baseUrl: ''
 	};
 
 	$(window).on('popstate', function(e) {
@@ -45,7 +45,8 @@ define(['jquery', 'app/callback', 'app/utils'], function($, Callback, Utils) {
 		go: function(url, state) {
 
 			if(url.indexOf('/') === 0) {
-				url = this.get('baseUrl') + url;
+				var baseUrl = this.get('baseUrl') || '';
+				url = baseUrl + url;
 			}
 
 			history.pushState(state, null, url);

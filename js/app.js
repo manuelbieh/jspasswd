@@ -29,10 +29,6 @@ require(["jquery", "handlebars", "GibberishAES", "FastClick", "jquery.locationOb
 		Router.set({
 			baseUrl: '/pword'
 		});
-	} else {
-		Router.set({
-			baseUrl: '/_git/pword'
-		});
 	}
 
 	$.locationObserver.start();
@@ -42,7 +38,6 @@ require(["jquery", "handlebars", "GibberishAES", "FastClick", "jquery.locationOb
 	});
 
 	FastClick.attach(document.body);
-
 
 	Router.add('/(index.html)?', function() {
 
@@ -91,6 +86,10 @@ require(["jquery", "handlebars", "GibberishAES", "FastClick", "jquery.locationOb
 			error: Error
 		});
 
+	});
+
+	Router.add('/entry/edit/(.*)', function(key) {
+		console.log(key);
 	});
 
 	Router.run();
