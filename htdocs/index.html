@@ -13,15 +13,37 @@
 -->
 <script></script>
 </head>
-<body>
+<body class="loading">
 
 <div id="wrapper">
+
 	<div id="canvas">
 		<div class="inner"></div>
 	</div>
+
+	<div id="ui">
+
+		<div id="menu">
+
+			<ul>
+				<li><a href="/lock" class="fn-menu-close">Lock</a></li></li>
+			</ul>
+
+		</div>
+
+		<button class="btn-ui btn-icon icon-menu" id="btn-menu"></button>
+		<button class="btn-ui btn-icon icon-back" id="btn-back"></button>
+
+	</div>
+
 </div>
 
 <script type="text/x-handlebars-template" data-tpl="open-url">
+
+	<header>
+		<h1>Passwords</h1>
+	</header>
+
 	<div>
 		<h1>Psswrd.js</h1>
 		<div class="form-group">
@@ -43,6 +65,7 @@
 		</div>
 		<button id="open" class="">Open</button>
 	</div>
+
 </script>
 
 
@@ -50,14 +73,7 @@
 
 	<header>
 		<h1>Passwords</h1>
-		<button class="btn-ui btn-icon icon-menu" id="menu"></button>
 	</header>
-
-	<div class="visibility-switch">
-		<button class="show-all">Show All</button>
-		<button class="hide-all hidden">Hide All</button>
-	</div>
-	<a href="lock">LOCK</a>
 
 	<ul id="password-list">
 	{{#each data}}
@@ -69,7 +85,10 @@
 				<dd><a href="{{url}}" target="_blank">{{url}}</a></dd>
 				{{/if}}
 				<dt class="item-password">Password</dt>
-				<dd><button class="btn-pwd-switch" data-visible="false" data-resolved="{{resolved}}">••••••••</button></dd>
+				<dd>
+					<button class="btn-pwd-switch" data-visible="false" data-resolved="{{resolved}}" data-hidden="••••••••">Show</button>
+					<pre class="item-password-value">••••••••</pre>
+				</dd>
 				{{#if notes}}
 				<dt class="item-notes">Notes</dt>
 				<dd>{{breaklines notes}}</dd>
@@ -80,6 +99,19 @@
 		<li>No items found.</li>
 	{{/each}}
 	</ul>
+
+	<footer>
+		<nav class="navbar">
+			<ul>
+				<li class="item">
+					<button class="show-all">Show All</button>
+				</li>
+				<li class="item">
+					<button class="hide-all">Hide All</button>
+				</li>
+			</ul>
+		</nav>
+	</footer>
 
 <!--
 	<nav class="bottom-navbar">
@@ -94,24 +126,45 @@
 
 
 <script type="text/x-handlebars-template" data-tpl="lockscreen">
-	<div>
-		<h1>Locked</h1>
-		<div class="form-group">
-			<p>
-				<label>Enter password<br>
-				<input type="password" id="db-pw" value="">
-			</p>
-		</div>
-		<button id="unlock" class="">Unlock</button>
+
+	<header>
+		<h1>Passwords</h1>
+	</header>
+
+	<h1>Locked</h1>
+	<div class="form-group">
+		<p>
+			<label>Enter password<br>
+			<input type="password" id="db-pw" value="">
+		</p>
 	</div>
+
+	<button id="unlock" class="">Unlock</button>
+
 </script>
 
 
 <script type="text/x-handlebars-template" data-tpl="error">
+	<header>
+		<h1>OMG!</h1>
+	</header>
+
+	<h1>Oops! An error occured.</h1>
+	<p>{{error}}</p>
+
+</script>
+
+<script type="text/x-handlebars-template" data-tpl="help">
+
+	<header>
+		<h1>Help</h1>
+	</header>
+
 	<div>
-		<h1>Oops! An error occured.</h1>
-		<p>{{error}}</p>
+		<h2>About</h2>
+		Hi.
 	</div>
+
 </script>
 
 

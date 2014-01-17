@@ -11,11 +11,16 @@ define(["jquery"], function($) {
 			}
 
 			if(show === true || (typeof show == 'undefined' && item.attr('data-visible') == "false")) {
-				item.html(item.attr('data-resolved')).attr('data-visible', "true");
+				//item.html(item.attr('data-resolved')).attr('data-visible', "true");
+				item.html('hide').addClass('pw-visible').attr('data-visible', "true");
+				item.parent().find('.item-password-value').html(item.attr('data-resolved'));
 			} else if(show === false || (typeof show == 'undefined' && item.attr('data-visible') == "true")) {
-				item.html('••••••••').attr('data-visible', "false");
+				//item.html(item.attr('data-hidden')).attr('data-visible', "false");
+				item.html('show').removeClass('pw-visible').attr('data-visible', "false");
+				item.parent().find('.item-password-value').html(item.attr('data-hidden'));
 			}
 
+			/*
 			if($('*[data-visible="false"]').length === 0) {
 				// alle aufgedeckt
 				$('.visibility-switch').find('.show-all').addClass('hidden');
@@ -25,6 +30,7 @@ define(["jquery"], function($) {
 				$('.visibility-switch').find('.hide-all').addClass('hidden');				
 				$('.visibility-switch').find('.show-all').removeClass('hidden');
 			}
+			*/
 
 		},
 

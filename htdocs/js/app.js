@@ -92,6 +92,10 @@ require(["jquery", "handlebars", "GibberishAES", "FastClick", "jquery.locationOb
 		console.log(key);
 	});
 
+	Router.add('/help', function() {
+		Template.render('help');
+	});
+
 	Router.run();
 
 	return;

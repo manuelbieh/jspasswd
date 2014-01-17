@@ -1,4 +1,10 @@
-define(["jquery", "GibberishAES", "app/database", "app/callback", "app/template", "app/utils", "app/router"], function($, GibberishAES, Database, Callback, Template, Utils, Router) {
+define(["jquery", "GibberishAES", "app/database", "app/callback", "app/template", "app/utils", "app/router", "app/ui"], function($, GibberishAES, Database, Callback, Template, Utils, Router, UI) {
+
+	$(function() {
+		$('body').fadeIn(function() {
+			$('body').removeClass('loading');
+		});
+	});
 
 	$(document).on('click', '#open', function() {
 
@@ -9,7 +15,6 @@ define(["jquery", "GibberishAES", "app/database", "app/callback", "app/template"
 		);
 
 	});
-
 
 	$(document).on('click', '#unlock', function() {
 
@@ -30,16 +35,12 @@ define(["jquery", "GibberishAES", "app/database", "app/callback", "app/template"
 	});
 
 	$(document).on('click', '.btn-pwd-switch', function(e) {
-
 		Utils.togglePasswordVisibility($(this));
-
 	});
 
-	$(document).on('click', '.visibility-switch button', function(e) {
+	$(document).on('click', '.show-all, .hide-all', function(e) {
 
 		var $$ = $(this);
-		$$.parent().find('button').removeClass('hidden');
-		$$.addClass('hidden');
 
 		var show = !!$$.hasClass('show-all');
 		$('.pw-item').each(function(i, item) {
@@ -48,14 +49,19 @@ define(["jquery", "GibberishAES", "app/database", "app/callback", "app/template"
 
 	});
 
-/*
-	Callback.on('database.open', function() {
-		//Template.render('password-list', Database.get());
+	$(document).on('click', '#btn-menu', function(e) {
+		e.preventDefault();
+		UI.menu.toggle();
 	});
 
-	Callback.on('database.locked', function() {
-		Template.render('lockscreen');
+	$(document).on('click', '#btn-back', function(e) {
+		e.preventDefault();
+		history.back();
 	});
-*/
+
+	$(document).on('click', '.fn-menu-close', function(e) {
+		UI.menu.hide();
+	});
+
 
 });
