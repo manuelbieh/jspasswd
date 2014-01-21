@@ -18,7 +18,7 @@ define(['jquery', 'app/callback', 'app/utils'], function($, Callback, Utils) {
 		if(Utils.isInternalURL(href)) {
 			e.preventDefault();
 			history.pushState(null, null, href);
-			Router.run();
+			//Router.run();
 			return false;
 		}
 

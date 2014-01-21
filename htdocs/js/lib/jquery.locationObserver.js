@@ -7,79 +7,83 @@
 * @license MIT
 */
 
-jQuery(function($) {
+define(['jquery'], function($) {
 
-	$.extend({
+	jQuery(function($) {
 
-		locationObserver: {
+		$.extend({
 
-			lastLocation: location.href,
-			interval: 100,
-			timer: null,
+			locationObserver: {
 
-			start: function(interval) {
+				lastLocation: location.href,
+				interval: 100,
+				timer: null,
 
-				var that = this;
+				start: function(interval) {
 
-				if(typeof interval !== 'undefined') {
-					this.setInterval = parseInt(interval, 10);
-				}
+					var that = this;
 
-				if(this.timer !== null) {
-					console && console.log('Location observer is already running. Use $(location).on("change") to handle events.');
-					return;
-				}
-
-				this.timer = window.setInterval(function() {
-
-					if(that.lastLocation != location.href) {
-
-						that.lastLocation = location.href;
-
-						$(window.location).trigger('change', {
-							lastLocation: that.lastLocation
-						});
-
+					if(typeof interval !== 'undefined') {
+						this.setInterval = parseInt(interval, 10);
 					}
 
-				}, that.interval);
+					if(this.timer !== null) {
+						console && console.log('Location observer is already running. Use $(location).on("change") to handle events.');
+						return;
+					}
 
-			},
+					this.timer = window.setInterval(function() {
 
-			stop: function() {
+						if(that.lastLocation != location.href) {
 
-				if(this.timer !== null) {
-					window.clearInterval(this.timer);
-					this.timer = null;
-					return;
-				}
+							that.lastLocation = location.href;
 
-				console && console.log('Nothing to stop.');
+							$(window.location).trigger('change', {
+								lastLocation: that.lastLocation
+							});
 
-			},
+						}
 
-			restart: function() {
-				this.stop();
-				this.start();
-			},
+					}, that.interval);
 
-			setInterval: function(interval) {
+				},
 
-				if(isNaN(parseInt(interval, 10))) {
-					return;
-				}
+				stop: function() {
 
-				this.interval = parseInt(interval, 10);
+					if(this.timer !== null) {
+						window.clearInterval(this.timer);
+						this.timer = null;
+						return;
+					}
 
-				if(this.timer !== null) {
+					console && console.log('Nothing to stop.');
 
-					this.restart();
+				},
+
+				restart: function() {
+					this.stop();
+					this.start();
+				},
+
+				setInterval: function(interval) {
+
+					if(isNaN(parseInt(interval, 10))) {
+						return;
+					}
+
+					this.interval = parseInt(interval, 10);
+
+					if(this.timer !== null) {
+
+						this.restart();
+
+					}
 
 				}
 
 			}
 
-		}
+		});
 
 	});
 

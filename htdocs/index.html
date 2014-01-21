@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
 
 <title></title>
-<link href="css/layout.css" rel="stylesheet" type="text/css">
+<link href="/css/layout.css" rel="stylesheet" type="text/css">
 <!--
 <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="css/bootstrap.theme.css" rel="stylesheet" type="text/css">
@@ -38,6 +38,13 @@
 
 </div>
 
+<script type="text/x-handlebars-template" data-tpl="home">
+<ul>
+<li><a href="/database/open">Open database</a></li>
+<li><a href="/database/create">Create database</a></li>
+</ul>
+</script>
+
 <script type="text/x-handlebars-template" data-tpl="open-url">
 
 	<header>
@@ -49,7 +56,7 @@
 		<div class="form-group">
 			<p>
 				<label>Enter database URL<br>
-				<input type="url" id="db-url" value="smpl.pwd">
+				<input type="url" id="db-url" value="../smpl.pwd">
 			</p>
 		</div>
 		<div class="form-group">
@@ -86,7 +93,7 @@
 				{{/if}}
 				<dt class="item-password">Password</dt>
 				<dd>
-					<button class="btn-pwd-switch" data-visible="false" data-resolved="{{resolved}}" data-hidden="••••••••">Show</button>
+					<button class="btn-pwd-switch" data-visible="false" data-resolved="{{resolved}}" data-hidden="••••••••">show</button>
 					<pre class="item-password-value">••••••••</pre>
 				</dd>
 				{{#if notes}}

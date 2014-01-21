@@ -101,10 +101,9 @@ define(["jquery", "GibberishAES", "app/callback", "app/router"], function($, Gib
 		open: function(password) {
 
 			try {
-
 				this.decryptAll(this.get(), password);
 				_locked = false;
-				Router.go('/open');
+				Router.go('/database/view');
 				return true;
 				
 			} catch(e) {

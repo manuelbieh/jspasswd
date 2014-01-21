@@ -1,11 +1,12 @@
 requirejs.config({
-    baseUrl: 'js/lib',
+    baseUrl: '/js/lib',
     paths: {
         app: '../app',
         handlebars: 'handlebars-1.3.0',
         GibberishAES: 'gibberish-aes-1.0.0.min',
         FastClick: 'fastclick'
     },
+    urlArgs: "nocache=" + (+new Date()),
     shim: {
 		'handlebars': {
 			'exports': 'Handlebars'
@@ -41,13 +42,31 @@ require(["jquery", "handlebars", "GibberishAES", "FastClick", "jquery.locationOb
 
 	Router.add('/(index.html)?', function() {
 
+		Template.render('home');
+
+	});
+
+	Router.add('/database/open', function() {
+
 		Template.render('open-url');
 
 	});
 
-	Router.add('/open', function() {
 
-		if(Database.isLocked()) {
+	Router.add('/database/create', function() {
+
+		
+
+	});
+
+	Router.add('/database/view', function() {
+
+		if (!Database.get()) {
+
+			Router.go('/');
+			return;
+
+		} else if(Database.isLocked()) {
 
 			Router.go('/lock');
 			return;
@@ -64,12 +83,11 @@ require(["jquery", "handlebars", "GibberishAES", "FastClick", "jquery.locationOb
 
 			Database.lock();
 			Template.render('lockscreen');
-
-		} else {
-
-			Router.go('/');
+			return;
 
 		}
+
+		Router.go('/');
 
 	});
 
