@@ -2,3 +2,4 @@ php
 node_modules
 logs
 deploy.php
+libs/*
