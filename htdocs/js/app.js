@@ -40,11 +40,13 @@ require(["jquery", "handlebars", "GibberishAES", "FastClick", "jquery.locationOb
 
 	FastClick.attach(document.body);
 
+
 	Router.add('/(index.html)?', function() {
 
 		Template.render('home');
 
 	});
+
 
 	Router.add('/database/open', function() {
 
@@ -59,6 +61,15 @@ require(["jquery", "handlebars", "GibberishAES", "FastClick", "jquery.locationOb
 
 	});
 
+
+	Router.add('/settings', function() {
+
+		Template.render('settings');
+		return Router.END;
+
+	});
+
+
 	Router.add('/database/view', function() {
 
 		if (!Database.get()) {
@@ -68,7 +79,7 @@ require(["jquery", "handlebars", "GibberishAES", "FastClick", "jquery.locationOb
 
 		} else if(Database.isLocked()) {
 
-			Router.go('/lock');
+			Router.go('/database/lock');
 			return;
 
 		}
@@ -77,7 +88,7 @@ require(["jquery", "handlebars", "GibberishAES", "FastClick", "jquery.locationOb
 
 	});
 
-	Router.add('/lock', function() {
+	Router.add('/database/lock', function() {
 
 		if(Database.get()) {
 
@@ -106,7 +117,7 @@ require(["jquery", "handlebars", "GibberishAES", "FastClick", "jquery.locationOb
 
 	});
 
-	Router.add('/entry/edit/(.*)', function(key) {
+	Router.add('/database/entry/edit/(.*)', function(key) {
 		console.log(key);
 	});
 

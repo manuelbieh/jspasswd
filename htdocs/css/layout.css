@@ -34,9 +34,11 @@ h1 {
 input[type="text"], input[type="password"], input[type="url"], input[type="email"], input[type="tel"] {
   height: 34px;
   font-size: inherit;
-  padding: 6px 12px; }
+  padding: 6px 12px;
+  width: 256px;
+  max-width: 90%; }
 
-/* line 39 */
+/* line 41 */
 button, input[type="submit"], input[type="button"] {
   border-radius: 6px;
   border: 0;
@@ -60,15 +62,15 @@ button, input[type="submit"], input[type="button"] {
 	text-shadow: 1px 1px 0px rgba(255,255,255,0.4);
 }
 */
-/* line 63 */
+/* line 65 */
 dt {
   font-weight: bold; }
 
-/* line 67 */
+/* line 69 */
 dd {
   margin-left: 1.5em; }
 
-/* line 71 */
+/* line 73 */
 header {
   background: rgba(0, 0, 0, 0.3);
   height: 50px;
@@ -77,7 +79,7 @@ header {
   top: 0;
   left: 0; }
 
-/* line 80 */
+/* line 82 */
 header h1 {
   left: 0;
   line-height: 50px;
@@ -86,7 +88,7 @@ header h1 {
   top: 0;
   width: 100%; }
 
-/* line 89 */
+/* line 91 */
 footer {
   position: fixed;
   bottom: 0;
@@ -95,14 +97,14 @@ footer {
   background: black;
   height: 50px; }
 
-/* line 98 */
+/* line 100 */
 #wrapper {
   background: url(../img/bg-main.jpg) no-repeat;
   background-size: 100% 100%;
   min-height: 100%;
   position: relative; }
 
-/* line 105 */
+/* line 107 */
 #canvas {
   padding-bottom: 50px;
   background: rgba(255, 255, 255, 0.6);
@@ -110,27 +112,27 @@ footer {
   min-height: 100%;
   box-shadow: 0 10px 10px -10px black; }
 
-/* line 113 */
+/* line 115 */
 .inner {
   margin: auto;
   padding: 50px 16px 0 16px;
   width: 100%; }
 
-/* line 123 */
+/* line 125 */
 #password-list {
   margin-left: -16px;
   margin-right: -16px;
   margin-bottom: 0; }
 
-/* line 129 */
+/* line 131 */
 .hidden {
   display: none; }
 
-/* line 133 */
+/* line 135 */
 .visibility-switch {
   margin-bottom: 12px; }
 
-/* line 137 */
+/* line 139 */
 .pw-item {
   background: rgba(255, 255, 255, 0.4);
   box-shadow: inset 0 1px 0px #666, inset 0 2px 0 white;
@@ -138,11 +140,11 @@ footer {
   padding: 1em;
   position: relative; }
 
-/* line 145 */
+/* line 147 */
 .item-password-value {
   display: inline-block; }
 
-/* line 149 */
+/* line 151 */
 .btn-icon {
   display: inline-block;
   height: 50px;
@@ -173,7 +175,7 @@ footer {
 
 /* line 27, W:/_git/pword/src/scss/ui.scss */
 #menu, #btn-menu {
-  -webkit-transition: all 0.2s linear; }
+  -webkit-transition: all 0.2s cubic-bezier(0.1, 0.57, 0.1, 1); }
 
 /* line 33, W:/_git/pword/src/scss/ui.scss */
 .ui-showmenu #menu {

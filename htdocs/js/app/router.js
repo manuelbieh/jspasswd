@@ -26,6 +26,8 @@ define(['jquery', 'app/callback', 'app/utils'], function($, Callback, Utils) {
 
 	var Router = {
 
+		END: 1,
+
 		set: function(prop, value) {
 
 			if(typeof prop == 'object') {
@@ -101,9 +103,15 @@ define(['jquery', 'app/callback', 'app/utils'], function($, Callback, Utils) {
 
 						if(_routes[route] instanceof Array) {
 
-							_routes[route].forEach(function(handler) {
+							_routes[route].every(function(handler) {
 
-								handler.apply(handler.prototype, match);
+								var retVal = handler.apply(handler.prototype, match);
+
+								if(retVal === Router.END) {
+									return false;
+								}
+
+								return true;
 
 							});
 
