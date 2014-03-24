@@ -20,6 +20,7 @@ requirejs.config({
 require(["jquery", "handlebars", "GibberishAES", "FastClick", "jquery.locationObserver", "app/callback", "app/template", "app/database", "app/events", "app/router"], 
 	function($, hbs, GibberishAES, FastClick) {
 
+	var $locationObserver = require('jquery.locationObserver');
 	var Callback = require('app/callback');
 	var Template = require('app/template');
 	var Database = require('app/database');
@@ -27,9 +28,11 @@ require(["jquery", "handlebars", "GibberishAES", "FastClick", "jquery.locationOb
 	var Router = require('app/router');
 
 	if(location.host == 'dev.wiremore.de') {
+
 		Router.set({
 			baseUrl: '/pword'
 		});
+
 	}
 
 	$.locationObserver.start();
@@ -42,23 +45,17 @@ require(["jquery", "handlebars", "GibberishAES", "FastClick", "jquery.locationOb
 
 
 	Router.add('/(index.html)?', function() {
-
 		Template.render('home');
-
 	});
 
 
 	Router.add('/database/open', function() {
-
 		Template.render('open-url');
-
 	});
 
 
 	Router.add('/database/create', function() {
-
 		
-
 	});
 
 
@@ -112,7 +109,7 @@ require(["jquery", "handlebars", "GibberishAES", "FastClick", "jquery.locationOb
 		}
 
 		Template.render('error', {
-			error: Error
+			error: Error || 'Unknown error.'
 		});
 
 	});

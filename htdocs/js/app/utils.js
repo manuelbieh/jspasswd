@@ -20,18 +20,6 @@ define(["jquery"], function($) {
 				item.parent().find('.item-password-value').html(item.attr('data-hidden'));
 			}
 
-			/*
-			if($('*[data-visible="false"]').length === 0) {
-				// alle aufgedeckt
-				$('.visibility-switch').find('.show-all').addClass('hidden');
-				$('.visibility-switch').find('.hide-all').removeClass('hidden');
-			} else if($('*[data-visible="true"]').length === 0) {
-				// alle zugedeckt
-				$('.visibility-switch').find('.hide-all').addClass('hidden');				
-				$('.visibility-switch').find('.show-all').removeClass('hidden');
-			}
-			*/
-
 		},
 
 		isInternalURL: function(url) {

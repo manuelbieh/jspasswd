@@ -11,6 +11,17 @@ define(["jquery"], function($) {
 			hide: function() {
 				$('body').removeClass('ui-showmenu');
 			}
+		},
+		back: {
+			show: function() {
+				$('#btn-back').show();
+			},
+			hide: function() {
+				$('#btn-back').hide();
+			},
+			toggle: function(state) {
+				$('#btn-back').toggle(state);
+			}
 		}
 	};
 

@@ -7,7 +7,7 @@ define(['jquery', 'app/callback', 'app/utils'], function($, Callback, Utils) {
 	};
 
 	$(window).on('popstate', function(e) {
-		Router.run(e);
+	//	Router.run(e);
 	});
 
 	$(document).on('click', 'a', function(e) {
@@ -51,6 +51,8 @@ define(['jquery', 'app/callback', 'app/utils'], function($, Callback, Utils) {
 				url = baseUrl + url;
 			}
 
+			Callback.trigger('pageload');
+			console.log('going to ', url);
 			history.pushState(state, null, url);
 			//this.run();
 		},
@@ -114,6 +116,8 @@ define(['jquery', 'app/callback', 'app/utils'], function($, Callback, Utils) {
 								return true;
 
 							});
+							
+							Callback.trigger('pageload');
 
 						}
 

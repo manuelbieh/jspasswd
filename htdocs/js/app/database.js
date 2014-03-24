@@ -2,6 +2,7 @@ define(["jquery", "GibberishAES", "app/callback", "app/router"], function($, Gib
 
 	var _database;
 	var _password;
+	var _passwordEncrypted;
 	var _locked = true;
 
 	var Database = {
@@ -16,20 +17,28 @@ define(["jquery", "GibberishAES", "app/callback", "app/router"], function($, Gib
 		},
 
 		setPassword: function(password) {
-			_password = GibberishAES.enc(password, password);
+			//_password = GibberishAES.enc(password, password);
+			_passwordEncrypted = GibberishAES.enc(password, password);
+			_password = password;
 			return this;
 		},
 
 		getPassword: function() {
-			return _password;
+
+			return {
+				password: _password, 
+				passwordEncrypted: _passwordEncrypted
+			};
+
 		},
 
 		encryptEntry: function(clear, password) {
 			return GibberishAES.enc(clear, password);
 		},
 
-		encryptAll: function() {
-		
+		encryptAll: function(password) {
+			password = password || this.getPassword();
+			return GibberishAES.enc(JSON.stringify(this.get()), password);
 		},
 
 		decryptEntry: function(encrypted, password) {
@@ -44,6 +53,8 @@ define(["jquery", "GibberishAES", "app/callback", "app/router"], function($, Gib
 		},
 
 		decryptAll: function(_database, password) {
+
+			_database = _database || this.get();
 
 			if(typeof _database == 'object') {
 
@@ -101,8 +112,10 @@ define(["jquery", "GibberishAES", "app/callback", "app/router"], function($, Gib
 		open: function(password) {
 
 			try {
+
 				this.decryptAll(this.get(), password);
 				_locked = false;
+				Callback.trigger('database.open');
 				Router.go('/database/view');
 				return true;
 				
@@ -118,7 +131,7 @@ define(["jquery", "GibberishAES", "app/callback", "app/router"], function($, Gib
 		},
 
 		close: function() {
-		
+			Callback.trigger('database.close');
 		},
 
 		isLocked: function() {
@@ -140,7 +153,8 @@ define(["jquery", "GibberishAES", "app/callback", "app/router"], function($, Gib
 				}
 
 				_locked = true;
-				//Callback.trigger('database.locked');
+				_password = null;
+				Callback.trigger('database.lock');
 
 			} else {
 

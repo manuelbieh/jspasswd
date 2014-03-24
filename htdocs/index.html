@@ -23,14 +23,16 @@
 
 	<div id="ui">
 
-		<div id="menu">
+		<menu>
 
 			<ul>
-				<li><a href="/database/lock" class="fn-menu-close">Lock</a></li></li>
-				<li><a href="/settings" class="fn-menu-close">Settings</a></li></li>
+				<li class="menu-lock-db"><a href="/database/lock" class="fn-menu-lock">Lock</a></li></li>
+				<li class="menu-settings"><a href="/settings" class="fn-menu-close">Settings</a></li></li>
+				<li class="menu-sep"></li>
+				<li class="menu-open-db"><a href="/database/open" class="fn-menu-open">Open Database</a></li></li>
 			</ul>
 
-		</div>
+		</menu>
 
 		<button class="btn-ui btn-icon icon-menu" id="btn-menu"></button>
 		<button class="btn-ui btn-icon icon-back" id="btn-back"></button>
@@ -40,10 +42,20 @@
 </div>
 
 <script type="text/x-handlebars-template" data-tpl="home">
-	<ul>
-		<li><a href="/database/open">Open database</a></li>
-		<li><a href="/database/create">Create database</a></li>
-	</ul>
+
+	<header>
+		<h1>Passwords</h1>
+	</header>
+
+	<main>
+
+		<ul class="buttons">
+			<li><a href="/database/open">Open database</a></li>
+			<li><a href="/database/create">Create database</a></li>
+		</ul>
+
+	</main>
+
 </script>
 
 <script type="text/x-handlebars-template" data-tpl="open-url">
@@ -52,8 +64,10 @@
 		<h1>Passwords</h1>
 	</header>
 
-	<div>
+	<main>
+
 		<h1>Psswrd.js</h1>
+		<!--
 		<div class="form-group">
 			<p>
 				<label>
@@ -63,6 +77,7 @@
 				<label><input type="checkbox" name="save-db-server-url"> save</label>
 			</p>
 		</div>
+		-->
 		<div class="form-group">
 			<p>
 				<label>
@@ -86,7 +101,7 @@
 			</p>
 		</div>
 		<button id="open" class="">Open</button>
-	</div>
+	</main>
 
 </script>
 
@@ -97,30 +112,34 @@
 		<h1>Passwords</h1>
 	</header>
 
-	<ul id="password-list">
-	{{#each data}}
-		<li class="pw-item" data-index="{{@index}}">
-			<h1>{{title}}</h1>
-			<dl>
-				{{#if url}}
-				<dt class="item-url">URL</dt>
-				<dd><a href="{{url}}" target="_blank">{{url}}</a></dd>
-				{{/if}}
-				<dt class="item-password">Password</dt>
-				<dd>
-					<button class="btn-pwd-switch" data-visible="false" data-resolved="{{resolved}}" data-hidden="••••••••">show</button>
-					<pre class="item-password-value">••••••••</pre>
-				</dd>
-				{{#if notes}}
-				<dt class="item-notes">Notes</dt>
-				<dd>{{breaklines notes}}</dd>
-				{{/if}}
-			</dl>
-		</li>
-	{{else}}
-		<li>No items found.</li>
-	{{/each}}
-	</ul>
+	<main>
+
+		<ul id="password-list">
+		{{#each data}}
+			<li class="pw-item" data-index="{{@index}}">
+				<h1>{{title}}</h1>
+				<dl>
+					{{#if url}}
+					<dt class="item-url">URL</dt>
+					<dd><a href="{{url}}" target="_blank">{{url}}</a></dd>
+					{{/if}}
+					<dt class="item-password">Password</dt>
+					<dd>
+						<button class="btn-pwd-switch" data-visible="false" data-resolved="{{resolved}}" data-hidden="••••••••">show</button>
+						<pre class="item-password-value">••••••••</pre>
+					</dd>
+					{{#if notes}}
+					<dt class="item-notes">Notes</dt>
+					<dd>{{breaklines notes}}</dd>
+					{{/if}}
+				</dl>
+			</li>
+		{{else}}
+			<li>No items found.</li>
+		{{/each}}
+		</ul>
+
+	</main>
 
 	<footer>
 		<nav class="navbar">
@@ -130,6 +149,9 @@
 				</li>
 				<li class="item">
 					<button class="hide-all">Hide All</button>
+				</li>
+				<li class="item">
+					<button class="save">Save</button>
 				</li>
 			</ul>
 		</nav>
@@ -153,11 +175,15 @@
 		<h1>Passwords</h1>
 	</header>
 
-	<div class="form-group">
-		<p>
-			<button id="settings-clear-servers">Clear list of databases</button>
-		</p>
-	</div>
+	<main>
+
+		<div class="form-group">
+			<p>
+				<button id="settings-clear-servers">Clear list of databases</button>
+			</p>
+		</div>
+
+	</main>
 
 </script>
 
@@ -168,26 +194,36 @@
 		<h1>Passwords</h1>
 	</header>
 
-	<h1>Locked</h1>
-	<div class="form-group">
-		<p>
-			<label>Enter password<br>
-			<input type="password" id="db-pw" value="">
-		</p>
-	</div>
+	<main>
 
-	<button id="unlock" class="">Unlock</button>
+		<h1>Locked</h1>
+
+		<div class="form-group">
+			<p>
+				<label>Enter password<br>
+				<input type="password" id="db-pw" value="">
+			</p>
+		</div>
+
+		<button id="unlock" class="">Unlock</button>
+
+	</main>
 
 </script>
 
 
 <script type="text/x-handlebars-template" data-tpl="error">
+
 	<header>
 		<h1>OMG!</h1>
 	</header>
 
-	<h1>Oops! An error occured.</h1>
-	<p>{{error}}</p>
+	<main>
+
+		<h1>Oops! An error occured.</h1>
+		<p>{{error}}</p>
+
+	</main>
 
 </script>
 
@@ -197,10 +233,10 @@
 		<h1>Help</h1>
 	</header>
 
-	<div>
+	<main>
 		<h2>About</h2>
 		Hi.
-	</div>
+	</main>
 
 </script>
 
