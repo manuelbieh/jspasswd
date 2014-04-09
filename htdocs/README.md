@@ -1,4 +1,4 @@
-pword
+jspasswd
 =====
 
-JavaScript Password Storage Tool
+Clientside Password Storage Tool
